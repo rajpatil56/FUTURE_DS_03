@@ -51,46 +51,15 @@ Dataset file:📂 **Dataset:**
 - Jupyter Notebook 
 
 ---
-## Data Exploration, Cleaning, and Feature Engineering
+The dataset was first explored to understand its structure, data types, and overall quality using summary and information functions. This helped identify missing values, incorrect data types, and potential inconsistencies in the funnel metrics.
 
-### Data Understanding
-The dataset was first explored to understand its structure, data types, summary statistics, and the presence of missing values. This step helps identify potential data quality issues before cleaning and analysis.
+Missing values were handled carefully to preserve data integrity. Numerical values in the advertising spend column were filled using the median to avoid the influence of extreme values, while missing entries in the marketing channel column were filled using the most frequent category to maintain categorical consistency.
 
-python
-df.info()
-df.describe()
-df.isnull().sum()
+Duplicate records were removed to prevent repeated observations from skewing the analysis. Additionally, invalid records were filtered out by ensuring that visitor counts were greater than zero and that lead and customer values were non-negative, enforcing realistic funnel behavior.
 
----
-### Handling Missing Values
-Missing values were handled carefully to preserve data integrity. The numerical column ad_spend was filled using the median to minimize the impact of outliers, while missing values in the categorical channel column were filled using the most frequently occurring category.
-Copy code
-Python
-'''
-df['ad_spend'].fillna(df['ad_spend'].median(), inplace=True)
-df['channel'].fillna(df['channel'].mode()[0], inplace=True)'''
+After cleaning the data, new performance metrics were engineered to support funnel analysis. Visitor-to-lead conversion rate was calculated to measure the effectiveness of each channel in generating leads from traffic. Lead-to-customer conversion rate was computed to evaluate sales efficiency and conversion quality. Cost per lead was derived by dividing advertising spend by the number of leads, providing insight into marketing cost efficiency.
 
----
-
-### Removing Duplicates and Invalid Records
-Duplicate rows were removed to prevent repeated observations from affecting the analysis. Additionally, invalid records were filtered out by ensuring that visitor counts were greater than zero and that lead and customer values were non-negative, maintaining realistic funnel behavior.
-Copy code
-Python
-
-'''df.drop_duplicates(inplace=True)
-df = df[(df['visitors'] > 0) & (df['leads'] >= 0) & (df['customers'] >= 0)]'''
-
----
-
-### Feature Engineering
-After cleaning the dataset, new performance metrics were created to support funnel analysis. Visitor-to-lead conversion rate measures top-of-funnel efficiency, lead-to-customer conversion rate evaluates conversion quality, and cost per lead helps assess marketing cost efficiency.
-Copy code
-Python
-
-''' df['VLC'] = (df['leads'] / df['visitors']) * 100
-df['LCC'] = (df['customers'] / df['leads']) * 100
-df['CPL'] = df['ad_spend'] / df['leads']'''
-These steps prepared the dataset for accurate channel-wise analysis and visualization, ensuring reliable insights into marketing funnel performance.
+These cleaned and engineered features formed the foundation for subsequent channel-wise analysis and visualization, enabling meaningful insights into marketing funnel performance.
 
 ---
 
