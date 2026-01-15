@@ -32,7 +32,7 @@ marketing performance.
 - **customers** – Number of customers converted
 - **ad_spend** – Advertising spend for the channel
 
-Dataset file:(marketing_funnel_500_rows.csv)
+Dataset file:marketing_funnel_500_rows.csv
 
 - **Task03.ipynb** → Main analysis notebook
 - **marketing_funnel_500_rows.csv** → Dataset used for analysis
@@ -45,7 +45,8 @@ Dataset file:(marketing_funnel_500_rows.csv)
 - Pandas
 - NumPy
 - Matplotlib
-- Jupyter Notebook (Google Colab compatible)
+- plotly
+- Jupyter Notebook 
 
 ---
 
